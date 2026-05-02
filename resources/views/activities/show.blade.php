@@ -1,0 +1,3 @@
+@extends('layouts.app')
+@php($pageTitle = 'Detalhes da Atividade')
+@section('content')<div class="card"><div class="card-body"><h3>{{ $activity->titulo }}</h3><p class="mb-1"><strong>Tipo:</strong> {{ \App\Models\Activity::typeOptions()[$activity->tipo] ?? $activity->tipo }}</p><p class="mb-1"><strong>Status:</strong> {{ ucfirst($activity->status) }}</p><p class="mb-1"><strong>Relacionamento:</strong> {{ $activity->relacionado_tipo ?: '-' }} #{{ $activity->relacionado_id ?: '-' }}</p><p class="mb-1"><strong>Responsável:</strong> {{ $activity->responsavel?->name }}</p><p class="mb-0"><strong>Descrição:</strong> {{ $activity->descricao ?: '-' }}</p></div></div>@endsection

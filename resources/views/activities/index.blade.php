@@ -1,0 +1,18 @@
+@extends('layouts.app')
+
+@php($pageTitle = 'Atividades')
+
+@section('content')
+    @include('partials.action-legend', [
+        'actions' => [
+            ['icon' => 'fas fa-check', 'label' => 'Concluir', 'class' => 'btn-outline-success'],
+            ['icon' => 'fas fa-eye', 'label' => 'Visualizar', 'class' => 'btn-outline-secondary'],
+            ['icon' => 'fas fa-pen', 'label' => 'Editar', 'class' => 'btn-outline-primary'],
+            ['icon' => 'fas fa-trash', 'label' => 'Excluir', 'class' => 'btn-outline-danger'],
+            ['icon' => 'fas fa-plus', 'label' => 'Novo registro', 'class' => 'btn-primary'],
+        ],
+    ])
+
+    <div class="card mb-3"><div class="card-body"><form class="row g-2"><div class="col-md-3"><select name="tipo" class="form-select"><option value="">Tipo</option>@foreach($types as $key => $label)<option value="{{ $key }}" @selected(request('tipo') === $key)>{{ $label }}</option>@endforeach</select></div><div class="col-md-3"><select name="status" class="form-select"><option value="">Status</option><option value="pendente" @selected(request('status') === 'pendente')>Pendente</option><option value="concluida" @selected(request('status') === 'concluida')>Concluída</option><option value="cancelada" @selected(request('status') === 'cancelada')>Cancelada</option></select></div><div class="col-md-4"><select name="id_usuario_responsavel" class="form-select"><option value="">Responsável</option>@foreach($users as $user)<option value="{{ $user->id }}" @selected((string) request('id_usuario_responsavel') === (string) $user->id)>{{ $user->name }}</option>@endforeach</select></div><div class="col-md-2 d-flex gap-2"><button class="btn btn-outline-primary flex-fill">Filtrar</button><a href="{{ route('activities.create') }}" class="btn btn-primary" title="Nova atividade" aria-label="Nova atividade"><i class="fas fa-plus"></i></a></div></form></div></div>
+    <div class="card"><div class="card-body table-responsive"><table class="table table-hover"><thead><tr><th>Título</th><th>Tipo</th><th>Vencimento</th><th>Responsável</th><th>Status</th><th class="text-end">Ações</th></tr></thead><tbody>@forelse($activities as $activity)<tr class="@if($activity->status === 'pendente' && $activity->data_vencimento && $activity->data_vencimento->isPast()) table-danger @endif"><td>{{ $activity->titulo }}</td><td>{{ $types[$activity->tipo] ?? $activity->tipo }}</td><td>{{ optional($activity->data_vencimento)->format('d/m/Y H:i') }}</td><td>{{ $activity->responsavel?->name }}</td><td>{{ ucfirst($activity->status) }}</td><td class="text-end"><div class="action-buttons justify-content-end">@if($activity->status !== 'concluida')<form action="{{ route('activities.complete', $activity) }}" method="POST" class="d-inline">@csrf @method('PATCH')<button class="btn btn-sm btn-outline-success" title="Concluir" aria-label="Concluir"><i class="fas fa-check"></i></button></form>@endif <a href="{{ route('activities.show', $activity) }}" class="btn btn-sm btn-outline-secondary" title="Visualizar" aria-label="Visualizar"><i class="fas fa-eye"></i></a> <a href="{{ route('activities.edit', $activity) }}" class="btn btn-sm btn-outline-primary" title="Editar" aria-label="Editar"><i class="fas fa-pen"></i></a> <form action="{{ route('activities.destroy', $activity) }}" method="POST" class="d-inline" data-confirm-delete>@csrf @method('DELETE')<button class="btn btn-sm btn-outline-danger" title="Excluir" aria-label="Excluir"><i class="fas fa-trash"></i></button></form></div></td></tr>@empty<tr><td colspan="6" class="text-center text-muted">Nenhuma atividade encontrada.</td></tr>@endforelse</tbody></table>{{ $activities->links() }}</div></div>
+@endsection
