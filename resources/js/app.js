@@ -1,6 +1,5 @@
 import './bootstrap';
 import 'bootstrap';
-import 'admin-lte';
 import alertify from 'alertifyjs';
 
 const CrmApp = {

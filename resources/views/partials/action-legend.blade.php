@@ -1,7 +1,7 @@
 @props(['actions' => []])
 
 @if(count($actions))
-    <div class="card card-outline card-light mb-3">
+    <div class="card mb-3">
         <div class="card-body py-2">
             <div class="d-flex flex-wrap align-items-center gap-3 small text-muted">
                 <span class="fw-semibold text-dark">Legenda:</span>

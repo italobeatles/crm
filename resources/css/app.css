@@ -1,53 +1,16 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
 @import '@fortawesome/fontawesome-free/css/all.min.css';
-@import 'admin-lte/dist/css/adminlte.min.css';
 @import 'alertifyjs/build/css/alertify.min.css';
 @import 'alertifyjs/build/css/themes/bootstrap.min.css';
 
 body {
-    background: linear-gradient(135deg, #f4f6f9 0%, #e9eff5 100%);
+    background: #f6f7fb;
+    font-family: 'Roboto', sans-serif;
 }
 
 .alertify-notifier .ajs-message {
     border-radius: 0.5rem;
     text-shadow: none;
-}
-
-.brand-link {
-    font-weight: 700;
-    letter-spacing: 0.04em;
-}
-
-.content-header h1 {
-    font-size: 1.75rem;
-}
-
-.table td,
-.table th {
-    vertical-align: middle;
-}
-
-.kanban-stage {
-    min-height: 220px;
-}
-
-.kanban-card {
-    border-left: 4px solid var(--bs-primary);
-    cursor: grab;
-}
-
-.kanban-card.dragging {
-    opacity: 0.6;
-    cursor: grabbing;
-}
-
-.kanban-stage {
-    transition: background-color 0.2s ease;
-}
-
-.kanban-stage.is-drop-target {
-    background-color: #dbeafe !important;
-    border: 2px dashed #0d6efd;
 }
 
 .action-buttons {
@@ -76,4 +39,45 @@ body {
 .pagination svg {
     width: 1rem;
     height: 1rem;
+}
+
+.content-wrapper {
+    min-height: calc(100vh - 262px);
+}
+
+.small-box {
+    border-radius: 4px;
+    padding: 1.25rem;
+    color: #fff;
+}
+
+.small-box .inner h3 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.small-box .inner p {
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+
+.kanban-stage {
+    min-height: 220px;
+    transition: background-color 0.2s ease;
+}
+
+.kanban-card {
+    border-left: 4px solid var(--bs-primary);
+    cursor: grab;
+}
+
+.kanban-card.dragging {
+    opacity: 0.6;
+    cursor: grabbing;
+}
+
+.kanban-stage.is-drop-target {
+    background-color: #dbeafe !important;
+    border: 2px dashed #0d6efd;
 }
